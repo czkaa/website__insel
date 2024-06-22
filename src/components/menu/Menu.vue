@@ -1,13 +1,15 @@
 <template>
   <div class="w-full h-full flex flex-col overflow-hidden text-lg">
     <div class="w-full h-full relative">
-      <transition name="width">
+      <transition name="width" mode="in-out">
         <MenuCourse
+          class="absolute w-full h-full"
           :course="currentCourse"
           v-if="currentCourse && !isSaver"
           key="course"
         />
         <MenuBreak
+          class="absolute w-full h-full"
           :imageData="imageData"
           v-else-if="imageData.length > 0"
           key="break"
@@ -55,7 +57,7 @@ const getCurrentCourse = () => {
     return props.previousMenu.supper;
   } else if (currentHour >= 0 && currentHour < 11) {
     return props.menu.breakfast;
-  } else if (currentHour >= 12 && currentHour < 16) {
+  } else if (currentHour >= 15 && currentHour < 16) {
     return props.menu.lunch;
   } else if (currentHour >= 19 && currentHour < 22) {
     return props.menu.dinner;
@@ -74,36 +76,40 @@ const currentCourse = computed(() => {
   return getCurrentCourse(props.menu);
 });
 
-// onMounted(() => {
-//   setInterval(() => {
-//     isSaver.value = !isSaver.value;
-//   }, 8000);
-// });
+onMounted(() => {
+  setInterval(() => {
+    isSaver.value = true;
+    setTimeout(() => {
+      isSaver.value = false;
+    }, 4000);
+  }, 15000);
+});
 </script>
 
 <style>
 .width-enter-active,
 .width-leave-active {
-  transition: width 1s;
+  transition: all 0.5s;
   overflow: hidden;
+  position: absolute;
 }
 
 .width-enter-active {
-  position: absolute;
+  transform-origin: right bottom;
   right: 0;
 }
 
 .width-leave-active {
-  position: absolute;
+  transform-origin: left top;
   left: 0;
 }
 
 .width-enter-from,
 .width-leave-to {
-  width: 0;
+  transform: scaleY(0);
 }
 .width-enter-to,
 .width-leave-from {
-  width: 100vw; /* Adjust as needed */
+  transform: scaleY(1);
 }
 </style>

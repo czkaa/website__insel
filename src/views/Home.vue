@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-[#ff14ef]">
+  <div class="w-full h-full bg-[blue]">
     <template v-for="(menu, index) in formattedData">
       <Menu
         v-if="menu.date === today"

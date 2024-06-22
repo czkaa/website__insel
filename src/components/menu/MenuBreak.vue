@@ -1,6 +1,19 @@
 <template>
   <div class="h-full w-full bg-white flex justify-center items-center">
-    <!-- <MenuMask><img class="w-full h-full" :src="image" /></MenuMask> -->
+    <MenuMask
+      ><div
+        class="text-md font-sans font-ciao text-black grid grid-cols-2 gap-y-3"
+      >
+        <div class="text-left font-ciao">frühstück</div>
+        <div class="tracking-wider">8–11</div>
+        <div class="text-left font-ciao">lunch</div>
+        <div class="tracking-wider">14–17</div>
+        <div class="text-left font-ciao">abendessen</div>
+        <div class="tracking-wider">19–22</div>
+        <div class="text-left font-ciao">nachtsuppe</div>
+        <div class="tracking-wider">ab 22</div>
+      </div>
+    </MenuMask>
   </div>
 </template>
 

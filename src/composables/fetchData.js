@@ -30,7 +30,7 @@ export function fetchData(sheetID, gids) {
         gids.map((gid) => fetchGoogleSheetData(gid))
       );
       data.value = allData;
-      console.log(data.value);
+      console.log('DATA', data.value);
     } catch (error) {
       console.error('Error fetching data from all tabs:', error);
     }

@@ -21,7 +21,7 @@
 import { ref, computed } from 'vue';
 
 const images = ['star', 'circle', 'heart', 'rectangle'];
-const backgroundColors = ['yellow', 'red', 'orangered', 'lime'];
+const backgroundColors = ['yellow', 'red', 'orangered', 'lime', '#ff14ef'];
 const textColors = ['blue', 'black'];
 
 const backgroundColor = ref('white');

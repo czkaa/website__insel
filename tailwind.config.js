@@ -31,7 +31,7 @@ module.exports = {
         },
       ],
       md: [
-        '2.5rem', // 20
+        '2.25rem', // 20
         {
           lineHeight: '0.9', // 26
           letterSpacing: '-0.025em',

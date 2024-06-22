@@ -98,7 +98,7 @@ onMounted(() => {
       stage.value = 0;
       key.value++;
     }
-  }, 1500);
+  }, 2000);
 });
 
 const props = defineProps({
