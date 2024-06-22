@@ -7,7 +7,7 @@
         <div class="text-left font-ciao">frühstück</div>
         <div class="tracking-wider">8–11</div>
         <div class="text-left font-ciao">lunch</div>
-        <div class="tracking-wider">14–17</div>
+        <div class="tracking-wider">14–16</div>
         <div class="text-left font-ciao">abendessen</div>
         <div class="tracking-wider">19–22</div>
         <div class="text-left font-ciao">nachtsuppe</div>
