@@ -12,7 +12,7 @@ export function useFormatData(data) {
 
       const breakfast = {
         name: sheetData[2][1],
-        course: 'frühstück',
+        course: 'frühstück!',
         allergies: sheetData[2][2],
       };
 

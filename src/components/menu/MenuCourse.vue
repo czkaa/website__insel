@@ -34,15 +34,15 @@
             stage === 0
               ? 'scale(0)'
               : stage === 1
-              ? 'scale(0) rotate(180deg)'
+              ? 'scaleY(0.5) '
               : stage === 2
-              ? 'scale(1)'
+              ? 'scaleX(1)'
               : stage === 3
-              ? 'scaleX(0.6666)'
+              ? 'scaleX(0.5) translateX(-50%) '
               : stage === 4
-              ? 'scaleX(0)'
+              ? 'scaleX(1.25) scaleY(1.4)'
               : 'scale(0)',
-          transformOrigin: 'top left',
+          transformOrigin: 'bottom center',
           left: '0',
         }"
       >
@@ -67,9 +67,9 @@
               : stage === 2
               ? 'scale(0) rotate(180deg)'
               : stage === 3
-              ? 'scaleX(0.3333)'
+              ? 'scaleX(0.5)'
               : stage === 4
-              ? 'scale(1)'
+              ? 'scale(0)'
               : 'scale(0)',
           transformOrigin: 'bottom right',
           right: '0',
