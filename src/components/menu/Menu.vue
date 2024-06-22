@@ -57,7 +57,7 @@ const getCurrentCourse = () => {
     return props.previousMenu.supper;
   } else if (currentHour >= 8 && currentHour < 11) {
     return props.menu.breakfast;
-  } else if (currentHour >= 15 && currentHour < 16) {
+  } else if (currentHour >= 14 && currentHour < 17) {
     return props.menu.lunch;
   } else if (currentHour >= 19 && currentHour < 22) {
     return props.menu.dinner;
