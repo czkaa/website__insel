@@ -1,0 +1,21 @@
+    { 
+      "locale": {
+      "en": "en",
+      "de": "de"
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "text": "Text",
+      "artists" : "Artists"
+    },
+    "home": {
+     
+    },
+    "about": {
+
+    },
+    "text" : {
+      
+    }
+  }
