@@ -1,6 +1,6 @@
 <template>
   <div style="filter: contrast(100)" class="w-full h-full flex flex-col">
-    <div class="h-40 text-lg shrink-0 relative">
+    <div class="h-1/2 text-lg shrink-0 relative">
       <MenuMask
         :key="key"
         :style="{
@@ -9,7 +9,7 @@
             stage === 0
               ? 'scale(0)'
               : stage === 1
-              ? 'scaleY(2)'
+              ? 'scaleY(1.5)'
               : stage === 2
               ? 'scale(1)'
               : stage === 3
@@ -40,8 +40,8 @@
               : stage === 3
               ? 'scaleX(0.5) translateX(-50%) '
               : stage === 4
-              ? 'scaleX(1.25) scaleY(1.4)'
-              : 'scale(0)',
+              ? 'scaleX(1) scaleY(2)'
+              : 'scaleY(0)',
           transformOrigin: 'bottom center',
           left: '0',
         }"

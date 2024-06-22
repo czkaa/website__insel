@@ -1,5 +1,5 @@
 <template>
-  <Vue3Marquee :duration="10" class="bg-white py-0.5 text-[orangered]"
+  <Vue3Marquee :duration="20" class="bg-white py-1 pt-1.5 text-[orangered]"
     ><span v-html="textData" class="text-sm"></span
   ></Vue3Marquee>
 </template>
