@@ -55,7 +55,7 @@ const currentHour = new Date().getHours();
 const getCurrentCourse = () => {
   if (currentHour < 2 && props.previousMenu) {
     return props.previousMenu.supper;
-  } else if (currentHour >= 0 && currentHour < 11) {
+  } else if (currentHour >= 8 && currentHour < 11) {
     return props.menu.breakfast;
   } else if (currentHour >= 15 && currentHour < 16) {
     return props.menu.lunch;
@@ -63,12 +63,9 @@ const getCurrentCourse = () => {
     return props.menu.dinner;
   } else if (currentHour >= 22 && currentHour < 24) {
     return props.menu.supper;
+  } else {
+    return null;
   }
-  // } else if (currentHour >= 22 && props.menu.supper) {
-  //   return props.menu.supper;
-  // } else {
-  //   return 0;
-  // }
 };
 
 const isSaver = ref(false);
