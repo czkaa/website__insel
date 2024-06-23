@@ -50,18 +50,18 @@ const props = defineProps({
   previousMenu: Object,
 });
 
-const currentHour = new Date().getHours();
+const currentHour = ref(new Date().getHours());
 
 const getCurrentCourse = () => {
-  if (currentHour < 2 && props.previousMenu) {
+  if (currentHour.value < 2 && props.previousMenu) {
     return props.previousMenu.supper;
-  } else if (currentHour >= 8 && currentHour < 11) {
+  } else if (currentHour.value >= 8 && currentHour.value < 11) {
     return props.menu.breakfast;
-  } else if (currentHour >= 13 && currentHour < 16) {
+  } else if (currentHour.value >= 13 && currentHour.value < 16) {
     return props.menu.lunch;
-  } else if (currentHour >= 19 && currentHour < 22) {
+  } else if (currentHour.value >= 19 && currentHour.value < 22) {
     return props.menu.dinner;
-  } else if (currentHour >= 22 && currentHour < 24) {
+  } else if (currentHour.value >= 22 && currentHour.value < 24) {
     return props.menu.supper;
   } else {
     return null;
@@ -76,6 +76,7 @@ const currentCourse = computed(() => {
 onMounted(() => {
   setInterval(() => {
     isSaver.value = true;
+    currentHour.value = new Date().getHours();
     setTimeout(() => {
       isSaver.value = false;
     }, 4000);
