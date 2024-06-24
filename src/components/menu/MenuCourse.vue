@@ -1,7 +1,8 @@
 <template>
-  <div style="filter: contrast(100)" class="w-full h-full flex flex-col">
+  <div class="w-full h-full flex flex-col">
     <div class="h-1/2 text-lg shrink-0 relative">
       <MenuMask
+        style="filter: contrast(100)"
         :key="key"
         :style="{
           transition: 'all 0.75s',
@@ -27,6 +28,7 @@
     </div>
     <div class="w-full h-full flex relative">
       <MenuMask
+        style="filter: contrast(100)"
         :key="key"
         :style="{
           transition: 'all 0.75s',
@@ -54,6 +56,7 @@
 
       <MenuMask
         :key="key"
+        style="filter: contrast(100)"
         :style="{
           transition: 'all 0.75s',
           transform:
@@ -78,21 +81,37 @@
         >
       </MenuMask>
     </div>
-    <!-- 
+
     <MenuMask
       :key="key"
       :style="{
         transition: 'all 0.75s',
-        transform: stage === 5 ? 'scale(1)' : 'scaleY(0)',
+        transform:
+          stage === 5 || stage === 6 || stage === 7 || stage === 8
+            ? 'scale(1)'
+            : 'scaleY(0)',
         transformOrigin: 'top right',
         right: '0',
       }"
     >
       <span
-        class="w-[100vw] h-screen flex justify-center items-center text-md shrink-0 mix-blend-difference py-10"
-        ><img :src="img"
+        class="absolute w-full h-full flex justify-center items-center text-md shrink-0 py-10"
+      >
+        <img class="absolute w-3/4 h-3/4 object-contain" :src="image"
       /></span>
-    </MenuMask> -->
+    </MenuMask>
+
+    <MenuSchedule
+      :key="key"
+      style="filter: contrast(100)"
+      :style="{
+        transition: 'all 0.75s',
+        transform: stage === 9 || stage === 10 ? 'scale(1)' : 'scaleY(0)',
+        transformOrigin: 'bottom right',
+        right: '0',
+      }"
+    >
+    </MenuSchedule>
   </div>
 </template>
 
@@ -103,24 +122,25 @@ const stage = ref(0);
 const key = ref(0);
 const props = defineProps({
   course: Object,
+  imageData: Array,
 });
 
 onMounted(() => {
   setInterval(() => {
-    if (stage.value < 5) {
+    if (stage.value < 11) {
       stage.value++;
     } else {
       stage.value = 0;
       key.value++;
     }
-  }, 2000);
+  }, 2200);
 });
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-// const image = ref(props.imageData[getRandomInt(props.imageData.length - 1)]);
+const image = ref(props.imageData[getRandomInt(props.imageData.length)]);
 </script>
 
 <style>

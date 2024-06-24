@@ -7,8 +7,6 @@
         maskSize: '100% 100%',
         background: backgroundColor,
         color: 'white',
-        // animation: 'spin 1s ',
-        // animationIterationCount: '1',
       }"
       class="relative h-full w-full min-h-0 flex justify-center items-center text-center font-sans"
     >

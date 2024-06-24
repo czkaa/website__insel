@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="videoData && textData"
+    v-if="videoData && textData && imageData"
     class="w-full h-full flex flex-col overflow-hidden text-lg"
   >
     <div class="w-full h-full relative">
@@ -19,10 +19,6 @@
           key="break"
         />
       </transition>
-
-      <transition name="width">
-        <MenuSchedule v-if="isSchedule" />
-      </transition>
     </div>
 
     <MenuMarquee :textData="textData" v-if="textData.length > 0" />
@@ -38,13 +34,15 @@ const sheetID = '1iv4XUexJHJZEWLtKaGMM93PRBYmlGvmCxkMFly0sv8g';
 const gids = ['0'];
 const { data } = fetchData(sheetID, gids);
 
-// const imageData = computed(() => {
-//   return data.value[0]
-//     ? data.value[0]
-//         .slice(1) // Skip the first array
-//         .map((item) => item[1])
-//     : null; // Get the second element of each remaining sub-array
-// });
+const imageData = computed(() => {
+  return data.value[0]
+    ? data.value[0]
+        .slice(1) // Skip the first array
+        .map((item) => item[1]) // Get the second element of each remaining sub-array
+        .filter((item) => item !== null) // Remove items which are null
+    : null;
+});
+
 const textData = computed(() => {
   return data.value[0]
     ? '&nbsp;&nbsp;&nbsp+ + +&nbsp;&nbsp;&nbsp' +
@@ -67,7 +65,6 @@ const props = defineProps({
   currentHour: Number,
 });
 
-const isSchedule = ref(false);
 const currentCourse = computed(() => {
   return getCurrentCourse(props.menu);
 });
@@ -79,7 +76,7 @@ const getCurrentCourse = () => {
     return props.menu.breakfast;
   } else if (props.currentHour >= 13 && props.currentHour < 16) {
     return props.menu.lunch;
-  } else if (props.currentHour >= 19 && props.currentHour < 22) {
+  } else if (props.currentHour >= 19 && props.currentHour < 21) {
     return props.menu.dinner;
   } else if (props.currentHour >= 22 && props.currentHour < 24) {
     return props.menu.supper;
@@ -87,15 +84,6 @@ const getCurrentCourse = () => {
     return null;
   }
 };
-
-onMounted(() => {
-  setInterval(() => {
-    isSchedule.value = true;
-    setTimeout(() => {
-      isSchedule.value = false;
-    }, 4000);
-  }, 16000);
-});
 </script>
 
 <style>
