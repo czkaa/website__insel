@@ -48,9 +48,6 @@
       >
         <span
           class="w-[75vw] h-screen flex justify-center items-center text-md shrink-0 mix-blend-difference py-10"
-          flex
-          justify-center
-          items-center
           >{{ course.name }}</span
         >
       </MenuMask>
@@ -81,6 +78,21 @@
         >
       </MenuMask>
     </div>
+    <!-- 
+    <MenuMask
+      :key="key"
+      :style="{
+        transition: 'all 0.75s',
+        transform: stage === 5 ? 'scale(1)' : 'scaleY(0)',
+        transformOrigin: 'top right',
+        right: '0',
+      }"
+    >
+      <span
+        class="w-[100vw] h-screen flex justify-center items-center text-md shrink-0 mix-blend-difference py-10"
+        ><img :src="img"
+      /></span>
+    </MenuMask> -->
   </div>
 </template>
 
@@ -89,6 +101,9 @@ import { ref, computed, onMounted } from 'vue';
 
 const stage = ref(0);
 const key = ref(0);
+const props = defineProps({
+  course: Object,
+});
 
 onMounted(() => {
   setInterval(() => {
@@ -101,9 +116,11 @@ onMounted(() => {
   }, 2000);
 });
 
-const props = defineProps({
-  course: Object,
-});
+const getRandomInt = (max) => {
+  return Math.floor(Math.random() * max);
+};
+
+// const image = ref(props.imageData[getRandomInt(props.imageData.length - 1)]);
 </script>
 
 <style>

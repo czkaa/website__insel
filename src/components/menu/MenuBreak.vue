@@ -1,36 +1,21 @@
 <template>
-  <div class="h-full w-full bg-white flex justify-center items-center">
-    <MenuMask
-      ><div
-        class="text-md font-sans font-ciao text-black grid grid-cols-2 gap-y-3"
-      >
-        <div class="text-left font-ciao">frühstück</div>
-        <div class="tracking-wider">8–11</div>
-        <div class="text-left font-ciao">lunch</div>
-        <div class="tracking-wider">13–16</div>
-        <div class="text-left font-ciao">abendessen</div>
-        <div class="tracking-wider">19–22</div>
-        <div class="text-left font-ciao">nachtsuppe</div>
-        <div class="tracking-wider">ab 22</div>
-      </div>
-    </MenuMask>
-  </div>
+  <iframe
+    width="100%"
+    height="100%"
+    allow="autoplay"
+    :src="`https://www.youtube.com/embed/${videoID}?playlist=${videoID}&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1`"
+  >
+  </iframe>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
-  imageData: Array,
+  videoData: String,
 });
 
-const getRandomInt = (max) => {
-  return Math.floor(Math.random() * max);
-};
-
-const image = ref(props.imageData[getRandomInt(props.imageData.length)]);
-
-watch(image, async (newVal, oldVal) => {
-  console.log('VALUE', newVal, imageData.value);
+const videoID = computed(() => {
+  return props.videoData.split('v=')[1].split('&ab')[0];
 });
 </script>

@@ -1,19 +1,27 @@
 <template>
-  <div class="w-full h-full flex flex-col overflow-hidden text-lg">
+  <div
+    v-if="videoData && textData"
+    class="w-full h-full flex flex-col overflow-hidden text-lg"
+  >
     <div class="w-full h-full relative">
-      <transition name="width" mode="in-out">
+      <transition name="width">
         <MenuCourse
           class="absolute w-full h-full"
           :course="currentCourse"
-          v-if="currentCourse && !isSaver"
+          :imageData="imageData"
+          v-if="currentCourse"
           key="course"
         />
         <MenuBreak
           class="absolute w-full h-full"
-          :imageData="imageData"
-          v-else-if="imageData.length > 0"
+          :videoData="videoData"
+          v-else
           key="break"
         />
+      </transition>
+
+      <transition name="width">
+        <MenuSchedule v-if="isSchedule" />
       </transition>
     </div>
 
@@ -24,17 +32,19 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { fetchData } from '@/composables/fetchData';
+import MenuSchedule from './MenuSchedule.vue';
 
 const sheetID = '1iv4XUexJHJZEWLtKaGMM93PRBYmlGvmCxkMFly0sv8g';
 const gids = ['0'];
 const { data } = fetchData(sheetID, gids);
-const imageData = computed(() => {
-  return data.value[0]
-    ? data.value[0]
-        .slice(1) // Skip the first array
-        .map((item) => item[1])
-    : []; // Get the second element of each remaining sub-array
-});
+
+// const imageData = computed(() => {
+//   return data.value[0]
+//     ? data.value[0]
+//         .slice(1) // Skip the first array
+//         .map((item) => item[1])
+//     : null; // Get the second element of each remaining sub-array
+// });
 const textData = computed(() => {
   return data.value[0]
     ? '&nbsp;&nbsp;&nbsp+ + +&nbsp;&nbsp;&nbsp' +
@@ -42,45 +52,49 @@ const textData = computed(() => {
           .slice(1) // Skip the first item
           .map((item) => item[0]) // Get the first element of each sub-array
           .join('&nbsp;&nbsp;&nbsp;+ + +&nbsp;&nbsp;&nbsp;')
-    : ''; // Join with ' +++ '
+    : null; // Join with ' +++ '
+});
+
+const videoData = computed(() => {
+  return data.value[0] && data.value[0][1] && data.value[0][1][2]
+    ? data.value[0][1][2]
+    : null;
 });
 
 const props = defineProps({
   menu: Object,
   previousMenu: Object,
+  currentHour: Number,
 });
 
-const currentHour = ref(new Date().getHours());
+const isSchedule = ref(false);
+const currentCourse = computed(() => {
+  return getCurrentCourse(props.menu);
+});
 
 const getCurrentCourse = () => {
-  if (currentHour.value < 2 && props.previousMenu) {
+  if (props.currentHour < 2 && props.previousMenu) {
     return props.previousMenu.supper;
-  } else if (currentHour.value >= 8 && currentHour.value < 11) {
+  } else if (props.currentHour >= 8 && props.currentHour < 11) {
     return props.menu.breakfast;
-  } else if (currentHour.value >= 13 && currentHour.value < 16) {
+  } else if (props.currentHour >= 13 && props.currentHour < 17) {
     return props.menu.lunch;
-  } else if (currentHour.value >= 19 && currentHour.value < 22) {
+  } else if (props.currentHour >= 19 && props.currentHour < 22) {
     return props.menu.dinner;
-  } else if (currentHour.value >= 22 && currentHour.value < 24) {
+  } else if (props.currentHour >= 22 && props.currentHour < 24) {
     return props.menu.supper;
   } else {
     return null;
   }
 };
 
-const isSaver = ref(false);
-const currentCourse = computed(() => {
-  return getCurrentCourse(props.menu);
-});
-
 onMounted(() => {
   setInterval(() => {
-    isSaver.value = true;
-    currentHour.value = new Date().getHours();
+    isSchedule.value = true;
     setTimeout(() => {
-      isSaver.value = false;
+      isSchedule.value = false;
     }, 4000);
-  }, 15000);
+  }, 16000);
 });
 </script>
 
@@ -93,21 +107,21 @@ onMounted(() => {
 }
 
 .width-enter-active {
-  transform-origin: right bottom;
+  transform-origin: center;
   right: 0;
 }
 
 .width-leave-active {
-  transform-origin: left top;
-  left: 0;
+  transform-origin: center;
+  right: 0;
 }
 
 .width-enter-from,
 .width-leave-to {
-  transform: scaleY(0);
+  transform: scaleX(0);
 }
 .width-enter-to,
 .width-leave-from {
-  transform: scaleY(1);
+  transform: scaleX(1) rotate(360deg);
 }
 </style>

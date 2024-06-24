@@ -4,7 +4,7 @@ import axios from 'axios';
 export function fetchData(sheetID, gids) {
   const data = ref([]);
   let intervalId = null;
-  let interval = 5;
+  let interval = 30;
 
   // Fetch data from a single sheet using its GID
   const fetchGoogleSheetData = async (gid) => {

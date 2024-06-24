@@ -2,9 +2,10 @@
   <div class="w-full h-full bg-[blue]">
     <template v-for="(menu, index) in formattedData">
       <Menu
-        v-if="menu.date === today"
+        v-if="menu.date === currentDay"
         :menu="menu"
         :previousMenu="index === 0 ? null : formattedData[index - 1]"
+        :currentHour="currentHour"
       />
     </template>
   </div>
@@ -13,6 +14,7 @@
 <script setup>
 import { fetchData } from '@/composables/fetchData';
 import { useFormatData } from '@/composables/useFormatData';
+import { ref } from 'vue';
 
 const sheetID = '1194qVYLq4mTBw8aYpa1FVPcoOCEAITadvDj1AmJ9ymc';
 const gids = [
@@ -39,7 +41,13 @@ const formatDate = (date) => {
   return `${day}.${month}.${year}`;
 };
 
-const today = formatDate(new Date());
+const currentDay = ref(formatDate(new Date()));
+const currentHour = ref(new Date().getHours());
+
+setInterval(() => {
+  currentDay.value = formatDate(new Date());
+  currentHour.value = new Date().getHours();
+}, 1000);
 </script>
 
 <style></style>
