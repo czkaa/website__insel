@@ -1,8 +1,8 @@
 <template>
   <Vue3Marquee
     :duration="textData.length / 15"
-    class="bg-white py-1 pt-1.5 text-[orangered]"
-    ><span v-html="textData" class="text-sm"></span
+    class="bg-white py-1 pt-1.5 text-[orangered] overflow-hidden"
+    ><span v-html="textData" class="text-sm overflow-hidden"></span
   ></Vue3Marquee>
 </template>
 
