@@ -1,5 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col">
+    <!-- <span class="absolute top-0 rigth-0 z-50 text-md">{{ stage }}</span> -->
     <div class="h-1/2 text-lg shrink-0 relative">
       <MenuMask
         style="filter: contrast(100)"
@@ -7,17 +8,17 @@
         :style="{
           transition: 'all 0.75s',
           transform:
-            stage === 0
-              ? 'scale(0)'
+            stage === 0 || stage === 11
+              ? 'scaleY(2)'
               : stage === 1
-              ? 'scaleY(1.5)'
+              ? 'scaleY(1)'
               : stage === 2
               ? 'scale(1)'
               : stage === 3
               ? 'scale(1)'
               : stage === 4
               ? 'scaleY(0)'
-              : 'scale(0)',
+              : 'scaleY(0)',
           transformOrigin: 'top center',
         }"
       >
@@ -36,7 +37,7 @@
             stage === 0
               ? 'scale(0)'
               : stage === 1
-              ? 'scaleY(0.5) '
+              ? 'scaleX(1)'
               : stage === 2
               ? 'scaleX(1)'
               : stage === 3
@@ -116,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 
 const stage = ref(0);
 const key = ref(0);
@@ -140,7 +141,17 @@ const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-const image = ref(props.imageData[getRandomInt(props.imageData.length)]);
+const image = ref('');
+
+watch(
+  stage,
+  (newVal) => {
+    if (newVal === 0) {
+      image.value = props.imageData[getRandomInt(props.imageData.length)];
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style>

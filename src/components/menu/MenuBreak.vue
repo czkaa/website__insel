@@ -10,8 +10,8 @@
 
     <MenuSchedule
       :style="{
-        transition: 'all 0.75s',
-        transform: isSchedule ? 'scale(0.5)' : 'scale(0)',
+        transition: 'all 0.5s',
+        transform: isSchedule ? 'scale(0.25)' : 'scale(0)',
         right: '0',
         transformOrigin: 'top right',
       }"
@@ -39,7 +39,7 @@ onMounted(() => {
     isSchedule.value = true;
     setTimeout(() => {
       isSchedule.value = false;
-    }, 4000);
+    }, 6000);
   }, 15000);
 });
 </script>
