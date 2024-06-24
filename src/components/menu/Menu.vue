@@ -101,7 +101,7 @@ onMounted(() => {
 <style>
 .width-enter-active,
 .width-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
   overflow: hidden;
   position: absolute;
 }
