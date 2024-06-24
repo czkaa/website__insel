@@ -39,7 +39,7 @@ onMounted(() => {
     isSchedule.value = true;
     setTimeout(() => {
       isSchedule.value = false;
-    }, 2000);
-  }, 10000);
+    }, 4000);
+  }, 15000);
 });
 </script>
