@@ -22,9 +22,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 
-const props = defineProps({
-  videoData: String,
-});
+const props = defineProps({});
 
 // const videoID = computed(() => {
 //   return props.videoData.includes('v=')

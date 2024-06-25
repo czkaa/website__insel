@@ -83,7 +83,7 @@
       </MenuMask>
     </div>
 
-    <MenuMask
+    <!-- <MenuMask
       :key="key"
       :style="{
         transition: 'all 0.75s',
@@ -100,14 +100,14 @@
       >
         <img class="absolute w-3/4 h-3/4 object-contain" :src="image"
       /></span>
-    </MenuMask>
+    </MenuMask> -->
 
     <MenuSchedule
       :key="key"
       style="filter: contrast(100)"
       :style="{
         transition: 'all 0.75s',
-        transform: stage === 9 || stage === 10 ? 'scale(1)' : 'scaleY(0)',
+        transform: stage === 5 || stage === 6 ? 'scale(1)' : 'scaleY(0)',
         transformOrigin: 'bottom right',
         right: '0',
       }"
@@ -123,12 +123,11 @@ const stage = ref(0);
 const key = ref(0);
 const props = defineProps({
   course: Object,
-  imageData: Array,
 });
 
 onMounted(() => {
   setInterval(() => {
-    if (stage.value < 11) {
+    if (stage.value < 7) {
       stage.value++;
     } else {
       stage.value = 0;
@@ -141,17 +140,17 @@ const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-const image = ref('');
+// const image = ref('');
 
-watch(
-  stage,
-  (newVal) => {
-    if (newVal === 0) {
-      image.value = props.imageData[getRandomInt(props.imageData.length)];
-    }
-  },
-  { immediate: true }
-);
+// watch(
+//   stage,
+//   (newVal) => {
+//     if (newVal === 0) {
+//       image.value = props.imageData[getRandomInt(props.imageData.length)];
+//     }
+//   },
+//   { immediate: true }
+// );
 </script>
 
 <style>
