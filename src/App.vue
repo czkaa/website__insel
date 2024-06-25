@@ -1,5 +1,5 @@
 <template>
-  <RouterView class="fixed w-full h-full"></RouterView>
+  <RouterView class="fixed w-full h-full bg-[lime]"></RouterView>
 </template>
 
 <script setup>
